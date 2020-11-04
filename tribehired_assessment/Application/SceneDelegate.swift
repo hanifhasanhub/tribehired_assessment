@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //Plugin hide keyboard
         IQKeyboardManager.shared.enable = true
         
-        //Run first controller
+        //Run first controller test
         runFirstStoryBoard()
     }
 
