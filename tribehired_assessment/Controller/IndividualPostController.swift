@@ -28,9 +28,8 @@ class IndividualPostController: UIViewController , NVActivityIndicatorViewable{
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        getIndividualPost()
         configureView()
-        
+        getIndividualPost()
     }
     
     override func viewWillAppear(_ animated: Bool) {
