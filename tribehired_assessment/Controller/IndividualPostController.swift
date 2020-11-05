@@ -33,6 +33,15 @@ class IndividualPostController: UIViewController , NVActivityIndicatorViewable{
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+                super.viewWillAppear(true)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
     
     func configureView() {
         
@@ -49,6 +58,25 @@ class IndividualPostController: UIViewController , NVActivityIndicatorViewable{
         
     }
     
+    @IBAction func doBtnBack(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func getIndividualPost() {
+        
+        //Start Place holder
+        self.startAnimating()
+        
+        Webservice().fetchIndividualPost(userId: userId) { (IndividualPost) in
+            individualpostDetail = IndividualPost
+            DispatchQueue.main.async{
+                self.displayIndividualPost()
+                //get list of comment
+                self.getComment()
+            }
+        }
+    }
+    
     func displayIndividualPost() {
         
         if individualpostDetail != nil {
@@ -58,99 +86,16 @@ class IndividualPostController: UIViewController , NVActivityIndicatorViewable{
         
     }
     
-    func getIndividualPost() {
-        individualpostDetail = nil
-        
-        let urlString = "\(Urls().WebApiPost)/\(userId)"
-        print("Webservice getIndividualPost ->\(urlString)")
-        
-        //remove spacing
-        let urlNoPercent = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-        guard let url = URL(string: urlNoPercent) else { return }
-        
-        //start loader
-        self.startAnimating()
-        
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if error != nil {
-                print(error!.localizedDescription)
-                
-            }
-            
-            guard let data = data else { return }
-            //Implement JSON decoding and parsing
-            do {
-                //Decode retrived data with JSONDecoder and assing type of Article object
-                let jSONData = try JSONDecoder().decode(IndividualPost.self, from: data)
-                
-                //Get back to the main queue
-                DispatchQueue.main.async {
-                    // print(jSONData)
-                    
-                    //if JSON has value
-                    individualpostDetail = jSONData
-                    self.displayIndividualPost()
-                    self.getComment()
-                    //stop loader
-                    // self.stopAnimating()
-                }
-                
-            } catch let jsonError {
-                print(jsonError)
-                
-                //stop loader
-                //self.stopAnimating()
-            }
-        }.resume()
-    }
-    
     func getComment() {
-        listCommentPost.removeAll()
-        tmpListCommentPost.removeAll()
-        
-        let urlString = "\(Urls().WebApiComment)?postId=\(userId)"
-        print("Webservice getComment ->\(urlString)")
-        
-        //remove spacing
-        let urlNoPercent = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-        guard let url = URL(string: urlNoPercent) else { return }
-        
-        //start loader
-        // self.startAnimating()
-        
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if error != nil {
-                print(error!.localizedDescription)
-                
+        Webservice().fetchCommentPost(userId: userId) { (Comment) in
+            listCommentPost = Comment
+            tmpListCommentPost = listCommentPost
+            DispatchQueue.main.async{
+                self.tblComment.reloadData()
+                //Stop loader
+                self.stopAnimating()
             }
-            
-            guard let data = data else { return }
-            //Implement JSON decoding and parsing
-            do {
-                //Decode retrived data with JSONDecoder and assing type of Article object
-                let jSONData = try JSONDecoder().decode([CommentPost].self, from: data)
-                
-                //Get back to the main queue
-                DispatchQueue.main.async {
-                    //print(jSONData)
-                    
-                    //if JSON has value
-                    listCommentPost = jSONData
-                    tmpListCommentPost = listCommentPost
-                    self.tblComment.reloadData()
-                    //stop loader
-                    self.stopAnimating()
-                    
-                    
-                }
-                
-            } catch let jsonError {
-                print(jsonError)
-                
-                //stop loader
-                //self.stopAnimating()
-            }
-        }.resume()
+        }
     }
 }
 
@@ -185,12 +130,12 @@ extension IndividualPostController : UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-
+        
         return 0.00001
     }
-
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-
+        
         return 0.00001
     }
     
@@ -209,6 +154,7 @@ extension IndividualPostController : UITextFieldDelegate {
         if strText == "" {
             listCommentPost = tmpListCommentPost
         }else {
+            //Filter objct based on name, email, body
             if tmpListCommentPost.count > 0 {
                 listCommentPost.removeAll()
                 for item in tmpListCommentPost {
@@ -224,12 +170,13 @@ extension IndividualPostController : UITextFieldDelegate {
         }
         
         if listCommentPost.count == 0 {
-           constrainHeightTbl.constant = 1
-            
+            constrainHeightTbl.constant = 1
         }
         
+    
         tblComment.reloadData()
         view.endEditing(true)
+        
         return true
     }
 }
