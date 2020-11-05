@@ -21,7 +21,6 @@
 		67CC7C2F255255EF007EE6F5 /* CommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CC7C2E255255EF007EE6F5 /* CommentModel.swift */; };
 		67CC7C31255256A9007EE6F5 /* AllPostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CC7C30255256A9007EE6F5 /* AllPostController.swift */; };
 		67CC7C33255256D0007EE6F5 /* IndividualPostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CC7C32255256D0007EE6F5 /* IndividualPostController.swift */; };
-		67CC7C35255256E5007EE6F5 /* CommentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CC7C34255256E5007EE6F5 /* CommentController.swift */; };
 		67CC7C3725525DD6007EE6F5 /* AllPostTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CC7C3625525DD6007EE6F5 /* AllPostTblCell.swift */; };
 		67CC7C3C25529862007EE6F5 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CC7C3B25529862007EE6F5 /* UIViewExtension.swift */; };
 		67CC7C3F25529A00007EE6F5 /* Urls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CC7C3E25529A00007EE6F5 /* Urls.swift */; };
@@ -70,7 +69,6 @@
 		67CC7C2E255255EF007EE6F5 /* CommentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentModel.swift; sourceTree = "<group>"; };
 		67CC7C30255256A9007EE6F5 /* AllPostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPostController.swift; sourceTree = "<group>"; };
 		67CC7C32255256D0007EE6F5 /* IndividualPostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualPostController.swift; sourceTree = "<group>"; };
-		67CC7C34255256E5007EE6F5 /* CommentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentController.swift; sourceTree = "<group>"; };
 		67CC7C3625525DD6007EE6F5 /* AllPostTblCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPostTblCell.swift; sourceTree = "<group>"; };
 		67CC7C3B25529862007EE6F5 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		67CC7C3E25529A00007EE6F5 /* Urls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Urls.swift; sourceTree = "<group>"; };
@@ -207,7 +205,6 @@
 			children = (
 				67CC7C30255256A9007EE6F5 /* AllPostController.swift */,
 				67CC7C32255256D0007EE6F5 /* IndividualPostController.swift */,
-				67CC7C34255256E5007EE6F5 /* CommentController.swift */,
 				67CC7C3625525DD6007EE6F5 /* AllPostTblCell.swift */,
 				67CC7C402552BC42007EE6F5 /* IndividuPostTblCell.swift */,
 			);
@@ -504,7 +501,6 @@
 				6784EAC52553913C004B71EA /* WebService.swift in Sources */,
 				67CC7C3C25529862007EE6F5 /* UIViewExtension.swift in Sources */,
 				67CC7C33255256D0007EE6F5 /* IndividualPostController.swift in Sources */,
-				67CC7C35255256E5007EE6F5 /* CommentController.swift in Sources */,
 				67CC7C2F255255EF007EE6F5 /* CommentModel.swift in Sources */,
 				67CC7C412552BC42007EE6F5 /* IndividuPostTblCell.swift in Sources */,
 				67CC7C3F25529A00007EE6F5 /* Urls.swift in Sources */,
